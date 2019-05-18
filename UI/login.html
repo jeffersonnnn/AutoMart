@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    AutoMart - your one stop solution for automotive needs
+  </title>
+<link rel="stylesheet" href="./assets/css/styles.css" /> 
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Nunito" rel="stylesheet">
+</head>
+<body>
+  <header class="menu-container">
+    <nav class="menu">
+      <a href="./index.html" class="logo"><h2 class="homepage">Auto Mart</h2></a>
+      <div class="links">
+      <a href="./"><p class="login">Login</p></a>
+     <a href="./signup.html"><p class="signup">Sign Up</p></a>
+    </div> 
+    </nav>  
+  </header>
+ <main>
+    <section class="container form-container">
+      <h2 class="section-title">Login</h2>
+      <form class="form-card" onsubmit="return submitForm()" action="" method="post">
+        <label for="email">Enter Email</label>
+        <input type="email" name="email" id="email" class="form-element"
+          placeholder="Enter Email" required />
+        <label for="password">Enter Password</label>
+        <input type="password" name="password" id="password" class="form-element"
+          placeholder="Enter Password" required />
+        <button type="submit" class="success btn btn-primary user-form">Login</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p class="credits">AutoMart | Copyright &copy; 2019</p>
+  </footer>
+</body>
+</html>
