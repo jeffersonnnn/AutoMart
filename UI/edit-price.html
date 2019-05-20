@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    AutoMart - your one stop solution for automotive needs
+  </title>
+<link rel="stylesheet" href="./assets/css/styles.css" /> 
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Nunito" rel="stylesheet">
+<body>
+  <header class="menu-container">
+    <nav class="menu">
+      <a href="./" class="logo"><h2 class="homepage">Auto Mart</h2></a>
+      <div class="links">
+     <a href=""><p class="search">Search</p></a>
+     <a href="./showroom.html"><p class="login">Your Showroom</p></a>
+    </div> 
+    </nav>  
+  </header>
+ <main>
+    <section class="container form-container">
+      <h2 class="section-title">Update your listing</h2>
+      <form class="form-card" onsubmit="return submitForm()" method="post">
+      <h2 class="section-title">Update your price</h2>
+        <label for="enter-amount">Enter amount (in NGN)<span>*</span></label>
+        <input type="number" class="form-element" name="enter-amount" id="enter-amount">                           
+         <button type="submit" class="success btn btn-primary">Update Ad</button>
+      </form>
+    </section>
+  </main> 
+  <footer>
+    <p class="credits">AutoMart | Copyright &copy; 2019 |  <a href="./admin-page.html">Admin Page</a>  </footer>
+</body>
+</head>
+</html>
+
