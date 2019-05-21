@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha Server/src/test",
+    "test": "mocha Server/src/test* --exit",
     "cover": "istanbul cover _mocha Server/src/test",
     "build": "babel Server/server.js --out-dir Server/build",
     "dev-start": "babel-watch Server/server.js"
