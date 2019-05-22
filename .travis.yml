@@ -6,3 +6,12 @@ cache:
     - "node_modules"
 script:
   - npm run test
+addons:
+  code_climate:
+    repo_token:
+      secure: "K6omm/b3OHE7Us7kHmIxGH8f2PluReSyjTiLGrFqQOpkCZohnyS79Vt2LPRP0uLrZDEobW+ylP3VWsYjOcGm2+BFJAAfZMRJF+mgxpz3pPI0KFiJxBNxKt3i3kGzJlHBCQNI//tt2Z+Uu9DpziVfqoCbajvZHF54GjGVjVpqJyBSt2bvZC7FQt1dgjJH02lT5gVScJEdFRvYuVZgi1kdPsc7wxQq4jOoWRxTHWiWlfbXqTiFe/sVl9I8s4EkA2kVVtsiHulFD5G8iCzSdo3qzsjiHtAIVBxwkTQNI0cBM5dN5z7U/rOPcR0yK72K8i4/oAZfNd6rmmfN6geP8eZ8D+tWy+iRJ6U4tKzIyZHgiXMUaOcKJ9ShiH7pSnKn2TQzBtoFCfQDaim6E3yAZ/hMSZxZ7ILlpGGINe5X0Tf1Liiq+tifrwSYSM8tg+y2Mp3bu8nSKHbbehnp5QM/3AC/5ZWjXFyqqjHPGSKPl3DEwJuRWKfnVG49eSKYEbWBwSVI8KJWueo0aRnx6FPs5xvt6+qU/6t5gEtl1/GtHZGpZV3TxpO3pW0qi3oRXA/pyoC8oaE/csKQz4uVdZ1ofDacQBXCtMmPRSJcYmkwJg3OMDrIZQLi6WVrw1wtFvhQZ949PQVXcBj2QgIWCmesJo+N97dMgQ8MP/nMClSRMrOfhfw="
+script: istanbul cover node_modules/mocha/bin/_mocha -- -R spec
+before_script:
+  - npm install codeclimate-test-reporter istanbul -g
+after_script:
+  - codeclimate-test-reporter < ./coverage/lcov.info 
