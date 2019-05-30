@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha Server/src/test* --exit",
+    "test": "nyc --reporter=html --reporter=text mocha --timeout 5000000 --require @babel/register --require @babel/polyfill Server/src/test* --watch --watch-extensions js --exit",
     "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",
     "cover": "istanbul cover _mocha Server/src/test",
     "build": "babel Server/server.js --out-dir Server/build",
-    "dev-start": "babel-watch Server/server.js"
+    "dev-start": "babel-node Server/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,20 +22,22 @@
   },
   "homepage": "https://github.com/jeffersonnnn/AutoMart#readme",
   "dependencies": {
+    "babel-core": "^7.0.0-bridge.0",
+    "body-parser": "^1.19.0",
     "chai": "^4.2.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.0",
-    "install": "^0.12.2",
+    "jsonwebtoken": "^8.5.1",
     "mocha": "^6.1.4",
     "moment": "^2.24.0",
-    "npm": "^6.9.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/node": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-watch": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
