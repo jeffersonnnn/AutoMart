@@ -6,7 +6,6 @@ class UserController {
 	const { first_name, last_name, password, email, address } = req.body;
 
 	const id = userModel.length + 1;
-
 	const userData = {
 		id, 
 		first_name, 
@@ -16,14 +15,19 @@ class UserController {
 		address
 	}
 	userModel.push(userData);
+ 
+ 
 	return res.status(201).json({
 		status: 201,
 		data: {
-			token: generateToken(id, first_name, last_name, email),
+			token: generateToken({ id, first_name, last_name, email }),
 			id,
 			first_name,
 			last_name,
 			email
+		},
+		fun: function log() {
+			return data.token
 		}
 	})
   }
