@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha --timeout 5000000 --require @babel/register --require @babel/polyfill Server/src/test* --watch --watch-extensions js --exit",
+    "test": "nyc --reporter=html --reporter=text mocha --timeout 500 --require @babel/register --require @babel/polyfill Server/src/test/* --watch --watch-extensions js --exit",
     "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",
     "cover": "istanbul cover _mocha Server/src/test",
     "build": "babel Server/server.js --out-dir Server/build",
