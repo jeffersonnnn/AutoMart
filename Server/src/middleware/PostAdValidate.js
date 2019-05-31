@@ -1,4 +1,4 @@
-import postAdValidate from '../utils/post-ad-validation';
+import postAdValidate from '../utils/postAdValidation';
 
 class ValidatePostAd {
   static validatePostAd(req, res, next) {

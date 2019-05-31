@@ -1,4 +1,4 @@
-import carModel from '../models/car-model';
+import carModel from '../models/carModel';
 
 /**
  * @class CarController

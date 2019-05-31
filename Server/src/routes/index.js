@@ -1,6 +1,6 @@
 import express from 'express';
-import postAdRouter from './post-ad-router';
-import signInRouter from './sign-in-router';
+import postAdRouter from './postAdRouter';
+import signInRouter from './signinRouter';
 
 const router = express.Router();
 
