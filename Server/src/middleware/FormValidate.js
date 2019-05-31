@@ -1,12 +1,12 @@
-import formValidate from '../utils/form-validation';
+import formValidate from '../utils/formValidation';
 
 class ValidateForm {
   static validateSignup(req, res, next) {
-    const { first_name, last_name, email } = req.body;
-    if (!formValidate.first_name.test(first_name)) {
+    const { firstName, lastName, email } = req.body;
+    if (!formValidate.firstName.test(firstName)) {
       return res.status(406).json({ status: 406, error: 'Please input alphabets only' });
     }
-    if (!formValidate.last_name.test(last_name)) {
+    if (!formValidate.lastName.test(lastName)) {
       return res.status(406).json({ status: 406, error: 'Please input alphabets only' });
     }
     if (!formValidate.email.test(email)) {
