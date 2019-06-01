@@ -1,4 +1,5 @@
 import carModel from '../models/carModel';
+import orderModel from '../models/orderModel';
 
 /**
  * @class CarController
@@ -34,6 +35,32 @@ class AdvertController {
     res.status(201).json({
       status: 201,
       data: carData,
+    });
+  }
+
+  static postOrder(req, res) {
+    const { carId, priceOffered } = req.body;
+
+    const exactCar = carModel.find(car => car.id === carId);
+    if (!exactCar) {
+      res.status(404).json({ status: 404, message: 'Car does not exist' });
+      return;
+    }
+
+    const id = orderModel.length + 1;
+    const purchaseData = {
+      id,
+      carId,
+      created_on: new Date(),
+      price: exactCar.price,
+      priceOffered: priceOffered || 'pending',
+    };
+
+    orderModel.push(purchaseData);
+
+    res.status(201).json({
+      status: 201,
+      data: purchaseData,
     });
   }
 }

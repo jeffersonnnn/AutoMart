@@ -5,6 +5,6 @@ import verifyAuthToken from '../middleware/verifyAuthToken';
 
 const router = express.Router();
 
-router.post('/car', verifyAuthToken, PostAdValidate.validatePostAd, AdvertController.postAd);
+router.post('/order', verifyAuthToken, PostAdValidate.postOrder, AdvertController.postOrder);
 
 export default router;
