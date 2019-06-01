@@ -10,7 +10,7 @@ const verifyAuthToken = (req, res, next) => {
     return;
   }
   const token = authHeader.split(' ')[1];
-  jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
+  jwt.verify(authHeader, process.env.SECRET_KEY, (err, decodedToken) => {
     if (err) {
       res.status(401).json({ error: 'Unauthorised - Invalid Authencation Token', err });
       return;
