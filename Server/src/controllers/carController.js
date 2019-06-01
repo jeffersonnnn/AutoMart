@@ -15,35 +15,25 @@ class AdvertController {
 
   static postAd(req, res) {
     const {
-      email, manufacturer, model, price, state, status,
+      manufacturer, model, price, state, status,
     } = req.body;
 
     const id = carModel.length + 1;
     const carData = {
       id,
-      email,
       created_on: new Date(),
       manufacturer,
       model,
       price,
-      state: 'used',
-      status: 'available',
+      state,
+      status: status || 'available',
     };
 
     carModel.push(carData);
 
     res.status(201).json({
       status: 201,
-      data: {
-        id,
-        email,
-        created_on: new Date(),
-        manufacturer,
-        model,
-        price,
-        state,
-        status,
-      },
+      data: carData,
     });
   }
 }

@@ -56,6 +56,7 @@ class UserController {
           id,
           firstName,
           lastName,
+          email,
         }),
         id,
         firstName,
