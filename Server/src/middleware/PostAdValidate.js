@@ -41,6 +41,29 @@ class ValidatePostAd {
     }
     return next();
   }
+
+  static postOrder(req, res, next) {
+    const { carId, priceOffered } = req.body;
+
+    const errors = [];
+
+    if (!carId) {
+      errors.push('Please select car');
+    }
+
+    if (!priceOffered) {
+      errors.push('Please insert figure');
+    }
+
+    if (!postAdValidate.priceOffered.test(priceOffered)) {
+      errors.push('Please enter numbers only');
+    }
+
+    if (errors.length) {
+      return res.status(406).json({ status: 422, error: errors });
+    }
+    return next();
+  }
 }
 
 export default ValidatePostAd;
