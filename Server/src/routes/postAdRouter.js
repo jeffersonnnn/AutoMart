@@ -1,5 +1,5 @@
 import express from 'express';
-import PostAdValidate from '../middleware/PostAdValidate';
+import PostAdValidate from '../middleware/AdValidate';
 import AdvertController from '../controllers/carController';
 import verifyAuthToken from '../middleware/verifyAuthToken';
 

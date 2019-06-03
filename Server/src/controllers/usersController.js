@@ -50,7 +50,7 @@ class UserController {
     const { id, firstName, lastName } = data;
 
     return res.status(200).json({
-      status: 201,
+      status: 200,
       data: {
         token: generateToken({
           id,

@@ -25,7 +25,7 @@ const order = [
     buyer: 1234,
     carId: 14,
     amount: 33122222,
-    status: 'accepted',
+    status: 'pending',
   },
 ];
 
