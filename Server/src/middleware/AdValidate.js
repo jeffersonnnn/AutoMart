@@ -1,6 +1,6 @@
-import postAdValidate from '../utils/postAdValidation';
+import adValidate from '../utils/AdValidation';
 
-class ValidatePostAd {
+class ValidateAd {
   static validatePostAd(req, res, next) {
     const {
       manufacturer, model, price, state,
@@ -12,7 +12,7 @@ class ValidatePostAd {
       errors.push('Please insert manufacturer');
     }
 
-    if (!postAdValidate.manufacturer.test(manufacturer)) {
+    if (!adValidate.manufacturer.test(manufacturer)) {
       errors.push('Insert alphabets only');
     }
 
@@ -24,7 +24,7 @@ class ValidatePostAd {
       errors.push('Please insert price');
     }
 
-    if (!postAdValidate.price.test(price)) {
+    if (!adValidate.price.test(price)) {
       errors.push('Insert numbers only');
     }
 
@@ -32,7 +32,7 @@ class ValidatePostAd {
       errors.push('Please insert state of vehicle');
     }
 
-    if (!postAdValidate.state.test(state)) {
+    if (!adValidate.state.test(state)) {
       errors.push('Insert alphabets only');
     }
 
@@ -55,7 +55,7 @@ class ValidatePostAd {
       errors.push('Please insert figure');
     }
 
-    if (!postAdValidate.priceOffered.test(priceOffered)) {
+    if (!adValidate.priceOffered.test(priceOffered)) {
       errors.push('Please enter numbers only');
     }
 
@@ -64,6 +64,16 @@ class ValidatePostAd {
     }
     return next();
   }
+
+  static adjustOrder(req, res, next) {
+    const { amount } = req.body;
+
+    if (!adValidate.priceOffered.test(amount)) {
+      res.status(406).json({ status: 406, error: 'please insert numbers only' });
+    }
+
+    return next();
+  }
 }
 
-export default ValidatePostAd;
+export default ValidateAd;
