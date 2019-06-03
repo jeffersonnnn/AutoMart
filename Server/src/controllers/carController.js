@@ -87,6 +87,28 @@ class AdvertController {
       },
     });
   }
+
+  static adjustCarStatus(req, res) {
+    const { status } = req.body;
+
+    const adjustStatus = carModel.find(adjust => adjust.id === Number(req.params.carId));
+    // console.log(Number(req.params.id));
+    const newStatus = Object.assign({}, adjustStatus, { status });
+
+    res.status(200).json({
+      status: 200,
+      data: {
+        id: adjustStatus.id,
+        email: adjustStatus.email,
+        created_on: adjustStatus.createdOn,
+        manufacturer: adjustStatus.manufacturer,
+        model: adjustStatus.model,
+        price: adjustStatus.price,
+        state: adjustStatus.state,
+        status: newStatus.status,
+      },
+    });
+  }
 }
 
 export default AdvertController;
