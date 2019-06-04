@@ -3,10 +3,10 @@ const postAdValidate = {
   email: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
   manufacturer: /^[a-zA-Z]+$/,
   model: /^([a-zA-Z0-9 _-]+)$/,
-  price: /^[0-9]+$/,
+  price: /^-?\d*(\.\d+)?$/,
   state: /^[a-zA-Z]+$/,
   status: /^[a-zA-Z]+$/,
-  priceOffered: /^[0-9]+$/,
+  priceOffered: /^-?\d*(\.\d+)?$/,
 };
 
 export default postAdValidate;

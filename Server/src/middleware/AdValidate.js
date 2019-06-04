@@ -74,6 +74,15 @@ class ValidateAd {
 
     return next();
   }
+
+  static adjustPrice(req, res, next) {
+    const { price } = req.body;
+
+    if (!adValidate.priceOffered.test(price)) {
+      res.status(406).json({ status: 406, error: 'please insert numbers only' });
+    }
+    return next();
+  }
 }
 
 export default ValidateAd;

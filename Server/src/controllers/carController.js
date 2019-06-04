@@ -92,7 +92,6 @@ class AdvertController {
     const { status } = req.body;
 
     const adjustStatus = carModel.find(adjust => adjust.id === Number(req.params.carId));
-    // console.log(Number(req.params.id));
     const newStatus = Object.assign({}, adjustStatus, { status });
 
     res.status(200).json({
@@ -106,6 +105,27 @@ class AdvertController {
         price: adjustStatus.price,
         state: adjustStatus.state,
         status: newStatus.status,
+      },
+    });
+  }
+
+  static adjustCarPrice(req, res) {
+    const { price } = req.body;
+
+    const adjustPrice = carModel.find(adjust => adjust.id === Number(req.params.carId));
+    const newPrice = Object.assign({}, adjustPrice, { price });
+
+    res.status(200).json({
+      status: 200,
+      data: {
+        id: adjustPrice.id,
+        email: adjustPrice.email,
+        created_on: adjustPrice.createdOn,
+        manufacturer: adjustPrice.manufacturer,
+        model: adjustPrice.model,
+        price: newPrice.price,
+        state: adjustPrice.state,
+        status: adjustPrice.status,
       },
     });
   }
