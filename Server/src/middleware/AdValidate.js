@@ -69,7 +69,7 @@ class ValidateAd {
     const { amount } = req.body;
 
     if (!adValidate.priceOffered.test(amount)) {
-      res.status(406).json({ status: 406, error: 'please insert numbers only' });
+      return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
 
     return next();
@@ -79,7 +79,16 @@ class ValidateAd {
     const { price } = req.body;
 
     if (!adValidate.priceOffered.test(price)) {
-      res.status(406).json({ status: 406, error: 'please insert numbers only' });
+      return res.status(406).json({ status: 406, error: 'please insert numbers only' });
+    }
+    return next();
+  }
+
+  static validateParams(req, res, next) {
+    const { orderId, carId } = req.params;
+
+    if (Number(typeof orderId !== 'number') || Number(typeof carId !== 'number')) {
+      return res.status(406).json({ status: 406, error: 'parameter must be a number' });
     }
     return next();
   }

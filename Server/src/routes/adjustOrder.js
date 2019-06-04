@@ -9,6 +9,7 @@ router.patch(
   '/order/:orderId/price',
   verifyAuthToken,
   AdValidate.adjustOrder,
+  AdValidate.validateParams,
   AdvertController.adjustOrder,
 );
 
