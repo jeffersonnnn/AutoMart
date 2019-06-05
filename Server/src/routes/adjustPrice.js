@@ -9,7 +9,6 @@ router.patch(
   '/car/:carId/price',
   verifyAuthToken,
   AdValidate.adjustPrice,
-  AdValidate.validateParams,
   AdvertController.adjustCarPrice,
 );
 

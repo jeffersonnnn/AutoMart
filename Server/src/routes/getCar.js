@@ -1,16 +1,15 @@
 import express from 'express';
-import AdValidate from '../middleware/AdValidate';
 import AdvertController from '../controllers/carController';
+import AdValidate from '../middleware/AdValidate';
 import verifyAuthToken from '../middleware/verifyAuthToken';
 
 const router = express.Router();
 
-router.patch(
-  '/order/:orderId/price',
+router.get(
+  '/car/:carId/',
   verifyAuthToken,
-  AdValidate.adjustOrder,
-  AdValidate.validateOrderId,
-  AdvertController.adjustOrder,
+  AdValidate.validateCarId,
+  AdvertController.getCarById,
 );
 
 export default router;
