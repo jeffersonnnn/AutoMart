@@ -164,6 +164,22 @@ class AdvertController {
       },
     });
   }
+
+  static getAvailableCars(req, res) {
+    const { status } = req.query;
+
+    const getCars = carModel.filter(car => car.status === status);
+
+    if (status !== 'available') {
+      res.status(400).json({ status: 400, message: 'sorry, all cars are sold' });
+      return;
+    }
+
+    res.status(200).json({
+      status: 200,
+      data: getCars,
+    });
+  }
 }
 
 export default AdvertController;
