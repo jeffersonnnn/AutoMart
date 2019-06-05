@@ -68,10 +68,13 @@ class ValidateAd {
   static adjustOrder(req, res, next) {
     const { amount } = req.body;
 
+    if (amount === undefined) {
+      return res.status(406).json({ status: 406, error: 'please input value' }); 
+    }
+
     if (!adValidate.priceOffered.test(amount)) {
       return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
-
     return next();
   }
 
@@ -81,13 +84,26 @@ class ValidateAd {
     if (!adValidate.priceOffered.test(price)) {
       return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
+    
+    if (!Number(price)) {
+      return res.status(406).json({ status: 406, error: 'parameter must be a number' });
+    }
     return next();
   }
 
-  static validateParams(req, res, next) {
-    const { orderId, carId } = req.params;
+  static validateOrderId(req, res, next) {
+    const { orderId } = req.params;
 
-    if (Number(typeof orderId !== 'number') || Number(typeof carId !== 'number')) {
+    if (!Number(orderId)) {
+      return res.status(406).json({ status: 406, error: 'parameter must be a number' });
+    }
+    return next();
+  }
+
+  static validateCarId(req, res, next) {
+    const { carId } = req.params;
+
+    if (!Number(carId)) {
       return res.status(406).json({ status: 406, error: 'parameter must be a number' });
     }
     return next();
