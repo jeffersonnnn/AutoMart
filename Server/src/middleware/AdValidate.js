@@ -69,7 +69,7 @@ class ValidateAd {
     const { amount } = req.body;
 
     if (amount === undefined) {
-      return res.status(406).json({ status: 406, error: 'please input value' }); 
+      return res.status(406).json({ status: 406, error: 'please input value' });
     }
 
     if (!adValidate.priceOffered.test(amount)) {
@@ -84,7 +84,7 @@ class ValidateAd {
     if (!adValidate.priceOffered.test(price)) {
       return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
-    
+
     if (!Number(price)) {
       return res.status(406).json({ status: 406, error: 'parameter must be a number' });
     }
