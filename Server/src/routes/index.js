@@ -6,15 +6,19 @@ import adjustOrder from './adjustOrder';
 import adjustStatus from './adjustStatus';
 import adjustCarPrice from './adjustPrice';
 import getCar from './getCar';
+import deleteCar from './deleteCar';
 
 const router = express.Router();
 
-router.use(signInRouter,
+router.use(
+  signInRouter,
   postAdRouter,
   postOrderRouter,
   adjustOrder,
   adjustStatus,
   adjustCarPrice,
-  getCar);
+  getCar,
+  deleteCar,
+);
 
 export default router;

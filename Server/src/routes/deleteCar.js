@@ -1,9 +1,15 @@
 import express from 'express';
 import AdvertController from '../controllers/carController';
+import AdValidate from '../middleware/AdValidate';
 import verifyAuthToken from '../middleware/verifyAuthToken';
 
 const router = express.Router();
 
-router.patch('/car/:carId/status', verifyAuthToken, AdvertController.adjustCarStatus);
+router.delete(
+  '/car/:carId/',
+  verifyAuthToken,
+  AdValidate.validateCarId,
+  AdvertController.deleteSpecificCar,
+);
 
 export default router;
