@@ -15,9 +15,7 @@ class AdvertController {
    */
 
   static postAd(req, res) {
-    const {
-      manufacturer, model, price, state, status,
-    } = req.body;
+    const { manufacturer, model, price, state, status } = req.body;
 
     const id = carModel.length + 1;
     const carData = {
@@ -27,14 +25,14 @@ class AdvertController {
       model,
       price,
       state,
-      status: status || 'available',
+      status: status || 'available'
     };
 
     carModel.push(carData);
 
     res.status(201).json({
       status: 201,
-      data: carData,
+      data: carData
     });
   }
 
@@ -53,14 +51,14 @@ class AdvertController {
       carId,
       created_on: new Date(),
       price: exactCar.price,
-      priceOffered: priceOffered || 'pending',
+      priceOffered: priceOffered || 'pending'
     };
 
     orderModel.push(purchaseData);
 
     res.status(201).json({
       status: 201,
-      data: purchaseData,
+      data: purchaseData
     });
   }
 
@@ -88,8 +86,8 @@ class AdvertController {
         car_id: adjustPrice.carId,
         status: adjustPrice.status,
         oldPriceOffered: adjustPrice.amount,
-        newPriceOffered: Number(newPrice.amount),
-      },
+        newPriceOffered: Number(newPrice.amount)
+      }
     });
   }
 
@@ -114,8 +112,8 @@ class AdvertController {
         model: adjustStatus.model,
         price: adjustStatus.price,
         state: adjustStatus.state,
-        status: newStatus.status,
-      },
+        status: newStatus.status
+      }
     });
   }
 
@@ -135,8 +133,8 @@ class AdvertController {
         model: adjustPrice.model,
         price: Number(newPrice.price),
         state: adjustPrice.state,
-        status: adjustPrice.status,
-      },
+        status: adjustPrice.status
+      }
     });
   }
 
@@ -160,8 +158,8 @@ class AdvertController {
         price: getCar.price,
         manufacturer: getCar.manufacturer,
         model: getCar.model,
-        bodyType: getCar.bodyType,
-      },
+        bodyType: getCar.bodyType
+      }
     });
   }
 
@@ -170,6 +168,14 @@ class AdvertController {
 
     const getCars = carModel.filter(car => car.status === status);
 
+    if (!status) {
+      res.status(200).json({
+        status: 200,
+        data: carModel
+      });
+      return;
+    }
+
     if (status !== 'available') {
       res.status(400).json({ status: 400, message: 'sorry, all cars are sold' });
       return;
@@ -177,7 +183,7 @@ class AdvertController {
 
     res.status(200).json({
       status: 200,
-      data: getCars,
+      data: getCars
     });
   }
 }
