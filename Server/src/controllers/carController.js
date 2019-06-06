@@ -166,14 +166,26 @@ class AdvertController {
   }
 
   static getAvailableCars(req, res) {
-    const { status } = req.query;
+    const { status, minPrice, maxPrice } = req.query;
 
     const getCars = carModel.filter(car => car.status === status);
+
+    const getCarsWithinRange = carModel.filter(
+      car => car.price >= Number(minPrice) && car.price <= Number(maxPrice),
+    );
 
     if (!status) {
       res.status(200).json({
         status: 200,
         data: carModel,
+      });
+      return;
+    }
+
+    if (status && minPrice && maxPrice) {
+      res.status(200).json({
+        status: 200,
+        data: getCarsWithinRange,
       });
       return;
     }
