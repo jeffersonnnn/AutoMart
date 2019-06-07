@@ -6,7 +6,7 @@ const users = [
     lastName: 'Johnson',
     password: 'kingchess',
     address: '1441, Fifth Avenue',
-    is_admin: false,
+    is_admin: true,
   },
   {
     id: 2,
