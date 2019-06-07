@@ -8,7 +8,7 @@
     "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",
     "cover": "istanbul cover _mocha Server/src/test",
     "build": "babel Server/server.js --out-dir Server/build",
-    "dev-start": "nodemon --exec babel-node Server/server.js --env"
+    "start": "nodemon --exec babel-node Server/server.js --env"
   },
   "repository": {
     "type": "git",
