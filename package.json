@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.2"
+  },
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --timeout 500 --require @babel/register --require @babel/polyfill Server/src/test/* --exit",
     "nyc": "nyc --reporter=lcov npm run test && nyc report --reporter=text-lcov | coveralls",
