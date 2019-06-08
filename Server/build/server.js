@@ -18,10 +18,10 @@ app.use(_bodyParser["default"].json());
 app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
-app.use('/api/v1', _routes["default"]);
 app.get('/', function (req, res) {
   res.send('welcome to AutoMart');
 });
+app.use('/api/v1', _routes["default"]);
 var server = app.listen(3000, function () {
   console.log('App running on port 3000');
 });

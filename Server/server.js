@@ -10,10 +10,11 @@ app.use(
   }),
 );
 
-app.use('/api/v1', router);
 app.get('/', (req, res) => {
   res.send('welcome to AutoMart');
 });
+
+app.use('/api/v1', router);
 
 const server = app.listen(3000, () => {
   console.log('App running on port 3000');
