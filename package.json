@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "8.11.2",
-    "npm": "6.4.1"
+    "node": "8.11.2"
   },
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha --timeout 500 --require @babel/register --require @babel/polyfill Server/src/test/* --exit",
@@ -13,7 +12,8 @@
     "cover": "istanbul cover _mocha Server/src/test",
     "build": "babel Server/server.js --out-dir Server/build",
     "dev-start": "nodemon --exec babel-node Server/server.js --env",
-    "start": "node Server/build/server/server.js"
+    "start": "node Server/build/server/server.js",
+    "heroku-postbuild": "npm install"
   },
   "repository": {
     "type": "git",
