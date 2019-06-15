@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1', router);
 
 const server = app.listen(process.env.PORT || 3000, () => {
-  console.log('App running on port 3000');
+  console.log('App running on port 3000, yay');
 });
 
 app.all('*', (req, res) => {
