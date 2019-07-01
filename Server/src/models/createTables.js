@@ -1,10 +1,10 @@
-import pool from './pool'
+import pool from './pool';
 
 /**
  * Create users table
  */
 const createUsersTable = () => {
-  const queryText = 
+  const queryText =
     `
     CREATE TABLE IF NOT EXISTS 
       users(
@@ -16,7 +16,7 @@ const createUsersTable = () => {
         address VARCHAR(40),
         role INTEGER DEFAULT 0
     )`;
-    return pool.connect().then(client => {
+  return pool.connect().then(client => {
       return client.query(queryText)
     .then((res) => {
       console.log(res.rows);
