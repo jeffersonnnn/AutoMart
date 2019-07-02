@@ -12,7 +12,9 @@ class UserController {
         });
       }
       const newUser = await User.createUser(req.body);
-      const { id, firstname, lastname, email } = newUser[0];
+      const {
+        id, firstname, lastname, email,
+      } = newUser[0];
 
       const token = JwtAuthenticate({
         id,

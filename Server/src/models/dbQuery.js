@@ -1,14 +1,11 @@
 import pool from './pool';
 
-export default async (sql, params = null) => {
-    return new Promise((resolve, reject) => {
-        return pool.connect().then(client => {
-            return client.query(sql, params).then(result => {
-                resolve(result.rows)
-            }).catch(error => {
-                reject(error)
-            })
-        })
-    })
-}
-
+export default async (sql, params = null) => (
+  new Promise((resolve, reject) => (
+    pool.connect().then(client => (
+      client.query(sql, params).then(result => resolve(result.rows)).catch((error) => {
+        reject(error);
+      })
+    ))
+  ))
+);
