@@ -1,9 +1,8 @@
-import Bcrypt from 'bcryptjs'
+import Bcrypt from 'bcryptjs';
 
 
 class Password {
-
-    static hashPassword(password){
+  static hashPassword(password){
         const salt = Bcrypt.genSaltSync(10)
         return Bcrypt.hashSync(password,  salt)
     }

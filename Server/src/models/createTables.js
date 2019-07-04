@@ -15,18 +15,23 @@ const createUsersTable = () => {
         role INTEGER DEFAULT 0
     )`;
   return pool.connect().then((client) => {
-    client.query(queryText)
-      .then(() => {
+    return client.query(queryText)
+      .then((res) => {
+        /* eslint-disable no-console */
+        console.log(res.rows);
         client.end();
       })
-      .catch(() => {
+      .catch((err) => {
+        /* eslint-disable no-console */
+        console.log(err);
         client.end();
       });
   });
 };
 
+
 /**
-* Create cars table
+* Create create cars table
 */
 
 
@@ -45,11 +50,13 @@ const createCarsTable = () => {
     )`;
 
   return pool.connect().then((client) => {
-    client.query(queryText)
-      .then(() => {
+    return client.query(queryText)
+      .then((res) => {
+        console.log(res.rows);
         client.end();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         client.end();
       });
   });
@@ -59,7 +66,7 @@ const createCarsTable = () => {
 */
 
 const createOrdersTable = () => {
-  const queryText = ` CREATE TABLE IF NOT EXISTS 
+  const queryText = `CREATE TABLE IF NOT EXISTS 
       orders(
         id SERIAL PRIMARY KEY NOT NULL,
         users_id INTEGER, 
@@ -71,16 +78,17 @@ const createOrdersTable = () => {
     )`;
 
   return pool.connect().then((client) => {
-    client.query(queryText)
-      .then(() => {
+    return client.query(queryText)
+      .then((res) => {
+        console.log(res.rows);
         client.end();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         client.end();
       });
   });
 };
-
 
 /**
 * Create create flags table
@@ -88,9 +96,7 @@ const createOrdersTable = () => {
 
 
 const createFlagsTable = () => {
-  const queryText = 
-    `
-    CREATE TABLE IF NOT EXISTS 
+  const queryText = `CREATE TABLE IF NOT EXISTS 
       flags(
         id SERIAL PRIMARY KEY NOT NULL,
         car_id INTEGER,
@@ -101,11 +107,13 @@ const createFlagsTable = () => {
     )`;
 
   return pool.connect().then((client) => {
-    client.query(queryText)
-      .then(() => {
+    return client.query(queryText)
+      .then((res) => {
+        console.log(res.rows);
         client.end();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         client.end();
       });
   });
