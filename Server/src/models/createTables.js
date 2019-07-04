@@ -1,12 +1,10 @@
-import pool from './pool'
+import pool from './pool';
 
 /**
  * Create users table
  */
 const createUsersTable = () => {
-  const queryText = 
-    `
-    CREATE TABLE IF NOT EXISTS 
+  const queryText = `CREATE TABLE IF NOT EXISTS 
       users(
         id SERIAL PRIMARY KEY NOT NULL,
         email VARCHAR(30) UNIQUE NOT NULL,
@@ -16,31 +14,24 @@ const createUsersTable = () => {
         address VARCHAR(40),
         role INTEGER DEFAULT 0
     )`;
-    return pool.connect().then(client => {
-      return client.query(queryText)
-    .then((res) => {
-      console.log(res.rows);
-      client.end();
-    })
-    .catch((err) => {
-      console.log(err);
-      client.end();
-    });
-    })
-  
-}
-
-
+  return pool.connect().then((client) => {
+    client.query(queryText)
+      .then(() => {
+        client.end();
+      })
+      .catch(() => {
+        client.end();
+      });
+  });
+};
 
 /**
-* Create create cars table
+* Create cars table
 */
 
 
 const createCarsTable = () => {
-  const queryText = 
-    `
-    CREATE TABLE IF NOT EXISTS 
+  const queryText = `CREATE TABLE IF NOT EXISTS 
       cars(
         id SERIAL PRIMARY KEY NOT NULL,
         owner INTEGER REFERENCES users(id),
@@ -53,27 +44,22 @@ const createCarsTable = () => {
         body_type VARCHAR (40) NOT NULL
     )`;
 
-    return pool.connect().then(client => {
-      return client.query(queryText)
-    .then((res) => {
-      console.log(res.rows);
-      client.end();
-    })
-    .catch((err) => {
-      console.log(err);
-      client.end();
-    });
-    })
-  
-}
+  return pool.connect().then((client) => {
+    client.query(queryText)
+      .then(() => {
+        client.end();
+      })
+      .catch(() => {
+        client.end();
+      });
+  });
+};
 /**
 * Create Order Table
 */
 
 const createOrdersTable = () => {
-  const queryText = 
-  `
-  CREATE TABLE IF NOT EXISTS 
+  const queryText = ` CREATE TABLE IF NOT EXISTS 
       orders(
         id SERIAL PRIMARY KEY NOT NULL,
         users_id INTEGER, 
@@ -84,18 +70,16 @@ const createOrdersTable = () => {
         status VARCHAR(13) DEFAULT 'pending' 
     )`;
 
-    return pool.connect().then(client => {
-      return client.query(queryText)
-    .then((res) => {
-      console.log(res.rows);
-      client.end();
-    })
-    .catch((err) => {
-      console.log(err);
-      client.end();
-    });
-    })  
-}
+  return pool.connect().then((client) => {
+    client.query(queryText)
+      .then(() => {
+        client.end();
+      })
+      .catch(() => {
+        client.end();
+      });
+  });
+};
 
 
 /**
@@ -116,25 +100,20 @@ const createFlagsTable = () => {
         description VARCHAR(40) NOT NULL
     )`;
 
-    return pool.connect().then(client => {
-      return client.query(queryText)
-    .then((res) => {
-      console.log(res.rows);
-      client.end();
-    })
-    .catch((err) => {
-      console.log(err);
-      client.end();
-    });
-    })
-  
-}
+  return pool.connect().then((client) => {
+    client.query(queryText)
+      .then(() => {
+        client.end();
+      })
+      .catch(() => {
+        client.end();
+      });
+  });
+};
 
-(async() => {
-  await createUsersTable()
-  await createCarsTable()
-  await createOrdersTable()
-  await createFlagsTable()
-})()
-
-
+(async () => {
+  await createUsersTable();
+  await createCarsTable();
+  await createOrdersTable();
+  await createFlagsTable();
+})();

@@ -1,25 +1,21 @@
 
-import pool from './pool'
+import pool from './pool';
 
 const dropUsersTable = () => {
-    const queryText = `DROP TABLE IF EXISTS users CASCADE;
+  const queryText = `DROP TABLE IF EXISTS users CASCADE;
                     DROP TABLE IF EXISTS orders CASCADE;
                     DROP TABLE IF EXISTS cars CASCADE;
-                    DROP TABLE IF EXISTS flags CASCADE;`
-                    
-    return pool.connect().then(client => {
-        return client.query(queryText)
-        .then((res) => {
-          console.log('Result', res.rows);
-          client.end()
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })
-}
+                    DROP TABLE IF EXISTS flags CASCADE;`;                            
+  return pool.connect().then((client) => {
+    client.query(queryText)
+      .then(() => {
+        client.end();
+      })
+      .catch(() => {
+      });
+  });
+};
 
-  (async () => {
-    await dropUsersTable()
-  })()
-
+(async () => {
+  await dropUsersTable();
+})();

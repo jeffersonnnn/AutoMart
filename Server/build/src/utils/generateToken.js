@@ -16,9 +16,10 @@ _dotenv["default"].config();
 var generateToken = function generateToken(user) {
   var payload = {
     id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email
+    firstName: user.firstname,
+    lastName: user.lastname,
+    email: user.email,
+    address: user.address
   };
 
   var token = _jsonwebtoken["default"].sign(payload, process.env.SECRET_KEY, {

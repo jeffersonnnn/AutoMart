@@ -1,6 +1,6 @@
 import express from 'express';
 import FormValidate from '../middleware/FormValidate';
-import UserController from '../controllers/usersController';
+import UserController from '../controllers/userController';
 
 const router = express.Router();
 
@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/auth/signup', FormValidate.validateSignup, UserController.registerUser);
-router.post('/auth/signin', UserController.signIn);
+// router.post('/auth/signup', FormValidate.validateSignup, Users.registerUser);
+// router.post('/auth/signin', UserController.signIn);
 
 export default router;
