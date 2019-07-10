@@ -19,6 +19,8 @@ class AdvertController {
       manufacturer, model, price, state, status,
     } = req.body;
 
+console.log('==', req.authUser)
+
     const id = carModel.length + 1;
     const carData = {
       id,

@@ -12,7 +12,7 @@ const createUsersTable = () => {
         lastname VARCHAR(40) NOT NULL,
         password VARCHAR(128) NOT NULL,
         address VARCHAR(40),
-        role INTEGER DEFAULT 0
+        is_admin BOOLEAN DEFAULT false
     )`;
   return pool.connect().then((client) => {
     return client.query(queryText)
@@ -39,14 +39,14 @@ const createCarsTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
       cars(
         id SERIAL PRIMARY KEY NOT NULL,
-        owner INTEGER REFERENCES users(id),
+        owner INTEGER NOT NULL,
         created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
         state VARCHAR (40) NOT NULL,
-        status VARCHAR (40) NOT NULL,
-        price VARCHAR(14) NOT NULL,
-        manufacturer VARCHAR(40) NOT NULL,
-        model VARCHAR(14) NOT NULL,
-        body_type VARCHAR (40) NOT NULL
+        status VARCHAR(13) DEFAULT 'available',
+        price FLOAT NOT NULL,
+        manufacturer VARCHAR(255) NOT NULL,
+        model VARCHAR(255) NOT NULL,
+        body_type VARCHAR (255) NOT NULL
     )`;
 
   return pool.connect().then((client) => {
@@ -69,10 +69,8 @@ const createOrdersTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
       orders(
         id SERIAL PRIMARY KEY NOT NULL,
-        users_id INTEGER, 
-        FOREIGN KEY (users_id) REFERENCES users(id),
-        cars_id INTEGER,
-        FOREIGN KEY (cars_id) REFERENCES cars(id),
+        buyer INTEGER NOT NULL,
+        cars_id INTEGER REFERENCES cars(id),
         amount VARCHAR(14) NOT NULL,
         status VARCHAR(13) DEFAULT 'pending' 
     )`;
@@ -99,11 +97,10 @@ const createFlagsTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
       flags(
         id SERIAL PRIMARY KEY NOT NULL,
-        car_id INTEGER,
-        FOREIGN KEY (car_id) REFERENCES cars(id),
+        car_id INTEGER REFERENCES cars(id),
         created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
-        reason VARCHAR(40) NOT NULL,
-        description VARCHAR(40) NOT NULL
+        reason VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL
     )`;
 
   return pool.connect().then((client) => {
@@ -125,3 +122,6 @@ const createFlagsTable = () => {
   await createOrdersTable();
   await createFlagsTable();
 })();
+
+
+// owner INTEGER REFERENCES users(id),
