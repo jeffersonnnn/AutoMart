@@ -19,7 +19,7 @@ class CarsController {
           model,
           price,
           state,
-          status,
+          status: status || postAd[0].status,
         },
       });
     } catch (error) {

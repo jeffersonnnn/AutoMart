@@ -39,7 +39,7 @@ const createCarsTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
       cars(
         id SERIAL PRIMARY KEY NOT NULL,
-        owner INTEGER NOT NULL,
+        owner INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
         created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
         state VARCHAR (40) NOT NULL,
         status VARCHAR(13) DEFAULT 'available',
@@ -69,9 +69,10 @@ const createOrdersTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
       orders(
         id SERIAL PRIMARY KEY NOT NULL,
-        buyer INTEGER NOT NULL,
-        cars_id INTEGER REFERENCES cars(id),
-        amount VARCHAR(14) NOT NULL,
+        buyer INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+        car_id INTEGER REFERENCES cars(id) ON DELETE CASCADE NOT NULL,
+        created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
+        price_offered FLOAT NOT NULL,
         status VARCHAR(13) DEFAULT 'pending' 
     )`;
 
@@ -97,7 +98,7 @@ const createFlagsTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS 
       flags(
         id SERIAL PRIMARY KEY NOT NULL,
-        car_id INTEGER REFERENCES cars(id),
+        car_id INTEGER REFERENCES cars(id) ON DELETE CASCADE NOT NULL,
         created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),
         reason VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL
