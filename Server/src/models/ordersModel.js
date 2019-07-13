@@ -19,7 +19,7 @@ class Orders {
   }
 
   static async adjustOrderPrice(id, price_offered) {
-   const sql = 'UPDATE orders  SET price_offered = $1 WHERE id = $2 RETURNING *';
+    const sql = 'UPDATE orders  SET price_offered = $1 WHERE id = $2 RETURNING *';
     const params = [price_offered, id];
     const query = queryDB(sql, params);
     return query;   

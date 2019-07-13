@@ -33,6 +33,48 @@ class CarsController {
       });
     }
   }
+
+  static async adjustCarStatus(req, res) {
+    try {
+      const foundCar = await Cars.findById(parseInt(req.params.carId, 10));
+
+      if (!foundCar.length) {
+        return res.status(404).json({ status: 404, message: 'sorry, this car does not exist' });
+      }
+
+      const updatedStatus = await Cars.adjustCarStatus(
+        parseInt(req.params.carId, 10), req.body.status,
+      );
+
+      const {
+        id, created_on, manufacturer, model, price, state,
+      } = foundCar[0];
+
+
+      return res.status(201).json({
+        status: 201,
+        data: {
+          id,
+          email: req.authUser.email,
+          created_on,
+          manufacturer,
+          model,
+          price,
+          state,
+          status: updatedStatus[0].status,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });     
+    }
+  }
 }
 
 export default CarsController;
