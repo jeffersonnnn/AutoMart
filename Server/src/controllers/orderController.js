@@ -17,7 +17,40 @@ class OrderController {
           created_on: postOrder[0].created_on,
           status,
           price: foundCar[0].price,
-          price_offered,     
+          price_offered,   
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });
+    }
+  }
+
+  static async adjustOrder(req, res) {
+    try {
+      const foundOrder = await Orders.findByOrder(req.params.orderId);
+      const updatedPrice = await Orders.adjustOrderPrice(parseInt(req.params.orderId, 10),
+        req.body.price_offered);
+
+      const { new_price_offered } = req.body;
+
+      if (foundOrder[0].status !== 'pending') {
+        return res.status(400).json({ status: 400, message: 'offer processed already' });
+      }
+      return res.status(201).json({
+        status: 201,
+        data: {
+          id: foundOrder[0].id,
+          car_id: foundOrder[0].car_id,
+          status: foundOrder[0].status,
+          old_price_offered: foundOrder[0].price_offered,
+          new_price_offered: updatedPrice[0].price_offered,
         },
       });
     } catch (error) {
