@@ -81,7 +81,7 @@ class CarsController {
       const foundAd = await Cars.findById(parseInt(req.params.carId, 10));
       const updatedAdPrice = await Cars.adjustCarPrice(
         parseInt(req.params.carId, 10), req.body.price,
-      ); 
+      );
       const {
         id, created_on, manufacturer, model, state, status,
       } = foundAd[0];
@@ -108,6 +108,45 @@ class CarsController {
             ? 'Server down. Please try again later'
             : error.message,
       });
+    }
+  }
+
+  static async getSpecificCar(req, res) {
+    try {
+      const findCar = await Cars.findById(parseInt(req.params.carId, 10));    
+
+      const {
+        id, owner, created_on, state, status, price, manufacturer, model, body_type,
+      } = findCar[0];
+
+      if (!findCar) {
+        return res.status(400).json({ status: 400, message: 'sorry, this car does not exist' });
+      }
+
+      return res.status(200).json({
+        status: 200,
+        data: {
+          id,
+          owner,
+          created_on,
+          state,
+          status,
+          price,
+          manufacturer,
+          model,
+          body_type,
+        },
+      });
+
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });      
     }
   }
 }
