@@ -12,11 +12,18 @@ class Cars {
 
   static async postCars(newAd, owner) {
     const {
-      manufacturer, model, price, state, body_type, status,
+      manufacturer, model, price, state, body_type
     } = newAd;
 
-    const sql = 'INSERT INTO cars(owner, state, price, manufacturer, model, body_type, status) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-    const params = [owner, state, price, manufacturer, model, body_type, status];
+    const sql = 'INSERT INTO cars(owner, state, price, manufacturer, model, body_type) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+    const params = [owner, state, price, manufacturer, model, body_type];
+    const query = queryDB(sql, params);
+    return query;
+  }
+
+  static async adjustCarStatus(id, status) {
+    const sql = 'UPDATE cars SET status = $1 WHERE id = $2 RETURNING *';
+    const params = [status, id];
     const query = queryDB(sql, params);
     return query;
   }
