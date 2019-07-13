@@ -8,8 +8,8 @@ const router = express.Router();
 router.patch(
   '/order/:orderId/price',
   verifyAuthToken,
-  // AdValidate.adjustOrder,
-  // AdValidate.validateOrderId,
+  AdValidate.adjustOrder,
+  AdValidate.validateOrderId,
   OrderController.adjustOrder,
 );
 

@@ -72,7 +72,42 @@ class CarsController {
           process.env.NODE_ENV === 'production'
             ? 'Server down. Please try again later'
             : error.message,
-      });     
+      });    
+    }
+  }
+
+  static async adjustCarPrice (req, res) {
+    try {
+      const foundAd = await Cars.findById(parseInt(req.params.carId, 10));
+      const updatedAdPrice = await Cars.adjustCarPrice(
+        parseInt(req.params.carId, 10), req.body.price,
+      ); 
+      const {
+        id, created_on, manufacturer, model, state, status,
+      } = foundAd[0];
+
+      return res.status(201).json({
+        status: 201,
+        data: {
+          id,
+          email: req.authUser.email,
+          created_on,
+          manufacturer,
+          model,
+          price: updatedAdPrice[0].price,
+          state,
+          status,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });
     }
   }
 }

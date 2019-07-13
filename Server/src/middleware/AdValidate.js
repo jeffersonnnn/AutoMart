@@ -68,11 +68,11 @@ class ValidateAd {
   static adjustOrder(req, res, next) {
     const { price_offered } = req.body;
 
-    if (price_offered  === undefined) {
+    if (price_offered === undefined) {
       return res.status(406).json({ status: 406, error: 'please input value' });
     }
 
-    if (!adValidate.price_offered.test(price_offered )) {
+    if (!adValidate.price_offered.test(price_offered)) {
       return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
     return next();
@@ -81,7 +81,7 @@ class ValidateAd {
   static adjustPrice(req, res, next) {
     const { price } = req.body;
 
-    if (!adValidate.priceOffered.test(price)) {
+    if (!adValidate.price_offered.test(price)) {
       return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
 

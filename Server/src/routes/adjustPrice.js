@@ -1,6 +1,6 @@
 import express from 'express';
 import AdValidate from '../middleware/AdValidate';
-import AdvertController from '../controllers/carController';
+import CarsController from '../controllers/carsController';
 import verifyAuthToken from '../middleware/verifyAuthToken';
 
 const router = express.Router();
@@ -9,7 +9,7 @@ router.patch(
   '/car/:carId/price',
   verifyAuthToken,
   AdValidate.adjustPrice,
-  AdvertController.adjustCarPrice,
+  CarsController.adjustCarPrice,
 );
 
 export default router;
