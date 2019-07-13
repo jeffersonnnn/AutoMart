@@ -27,6 +27,13 @@ class Cars {
     const query = queryDB(sql, params);
     return query;
   }
+
+  static async adjustCarPrice(id, price) {
+    const sql = 'UPDATE cars SET price = $1 WHERE id = $2 RETURNING *';
+    const params = [price, id];
+    const query = queryDB(sql, params);
+    return query;
+  }
 }
 
 export default Cars;
