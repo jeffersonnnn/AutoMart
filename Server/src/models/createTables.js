@@ -8,8 +8,8 @@ const createUsersTable = () => {
       users(
         id SERIAL PRIMARY KEY NOT NULL,
         email VARCHAR(30) UNIQUE NOT NULL,
-        firstname VARCHAR (40) NOT NULL,
-        lastname VARCHAR(40) NOT NULL,
+        first_name VARCHAR (40) NOT NULL,
+        last_name VARCHAR(40) NOT NULL,
         password VARCHAR(128) NOT NULL,
         address VARCHAR(40),
         is_admin BOOLEAN DEFAULT false

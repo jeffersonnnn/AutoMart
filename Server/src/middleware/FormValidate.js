@@ -3,21 +3,21 @@ import formValidate from '../utils/formValidation';
 class ValidateForm {
   static validateSignup(req, res, next) {
     const {
-      firstName, lastName, email, password,
+      first_name, last_name, email, password,
     } = req.body;
-    if (firstName === undefined || firstName === '') {
+    if (first_name === undefined || first_name === '') {
       return res.status(406).json({ status: 406, error: 'First name is required!' });
     }
 
-    if (!formValidate.firstName.test(firstName)) {
+    if (!formValidate.first_name.test(first_name)) {
       return res.status(406).json({ status: 406, error: 'Please input alphabets only' });
     }
 
-    if (lastName === undefined || lastName === '') {
+    if (last_name === undefined || last_name === '') {
       return res.status(406).json({ status: 406, error: 'Last name is required!' });
     }
 
-    if (!formValidate.lastName.test(lastName)) {
+    if (!formValidate.last_name.test(last_name)) {
       return res.status(406).json({ status: 406, error: 'Please input alphabets only' });
     }
 

@@ -6,7 +6,7 @@ class CarsController {
       const postAd = await Cars.postCars(req.body, req.authUser.id);
 
       const {
-        manufacturer, model, price, state, status, image_url,
+        manufacturer, model, price, state, image_url,
       } = req.body;
 
       return res.status(201).json({
@@ -20,7 +20,7 @@ class CarsController {
           price,
           state,
           image_url,
-          status: status || postAd[0].status,
+          status: postAd[0].status,
         },
       });
     } catch (error) {
@@ -85,7 +85,7 @@ class CarsController {
         parseInt(req.params.carId, 10), req.body.price,
       );
       const {
-        id, created_on, manufacturer, model, state, status, image_url,
+        id, created_on, manufacturer, model, state, image_url,
       } = foundAd[0];
 
       return res.status(201).json({
@@ -99,7 +99,7 @@ class CarsController {
           price: updatedAdPrice[0].price,
           state,
           image_url,
-          status,
+          status: foundAd[0].status,
         },
       });
     } catch (error) {
@@ -119,7 +119,7 @@ class CarsController {
       const findCar = await Cars.findById(parseInt(req.params.carId, 10));    
 
       const {
-        id, owner, created_on, state, status, price, manufacturer, model, body_type, image_url,
+        id, owner, created_on, state, price, status, manufacturer, model, body_type, image_url,
       } = findCar[0];
 
       if (!findCar) {
@@ -155,8 +155,15 @@ class CarsController {
 
   static async getAllAvailableCars(req, res) {
     try {
-      const getCars = await Cars.getAvailableCars(req.params.status);
-      console.log(getCars);
+      const getCars = await Cars.getAvailableCars(req.query.status);
+      if (!getCars.length) {
+        return res.status(400).json({ status: 400, message: 'sorry, all cars are sold' });  
+      }
+
+      return res.status(200).json({
+        status: 200,
+        data: getCars,
+      });
     } catch (error) {
       return res.status(500).json({
         sucess: false,
@@ -165,7 +172,7 @@ class CarsController {
           process.env.NODE_ENV === 'production'
             ? 'Server down. Please try again later'
             : error.message,
-      });     
+      });  
     }
   }
 }

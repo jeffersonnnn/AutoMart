@@ -11,9 +11,9 @@ class Orders {
   }
 
   static async createOrder(order, buyer) {
-    const { price_offered, status, car_id } = order;
-    const sql = 'INSERT INTO orders(buyer, car_id, price_offered, status) VALUES ($1, $2, $3, $4) RETURNING *';
-    const params = [buyer, car_id, price_offered, status];
+    const { price_offered, car_id } = order;
+    const sql = 'INSERT INTO orders(buyer, car_id, price_offered) VALUES ($1, $2, $3) RETURNING *';
+    const params = [buyer, car_id, price_offered];
     const query = queryDB(sql, params);
     return query;
   }

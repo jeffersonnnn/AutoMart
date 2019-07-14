@@ -43,7 +43,7 @@ class ValidateAd {
   }
 
   static postOrder(req, res, next) {
-    const { carId, priceOffered } = req.body;
+    const { carId, price_offered } = req.body;
 
     const errors = [];
 
@@ -51,11 +51,11 @@ class ValidateAd {
       errors.push('Please select car');
     }
 
-    if (!priceOffered) {
+    if (!price_offered) {
       errors.push('Please insert figure');
     }
 
-    if (!adValidate.priceOffered.test(priceOffered)) {
+    if (!adValidate.price_offered.test(price_offered)) {
       errors.push('Please enter numbers only');
     }
 
@@ -81,7 +81,7 @@ class ValidateAd {
   static adjustPrice(req, res, next) {
     const { price } = req.body;
 
-    if (!adValidate.price_offered.test(price)) {
+    if (!adValidate.price.test(price)) {
       return res.status(406).json({ status: 406, error: 'please insert numbers only' });
     }
 

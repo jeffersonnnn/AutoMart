@@ -14,13 +14,13 @@ class UserController {
       }
       const newUser = await User.createUser(req.body);
       const {
-        id, firstname, lastname, email,
+        id, first_name, last_name, email,
       } = newUser[0];
 
       const token = JwtAuthenticate({
         id,
-        firstname,
-        lastname,
+        first_name,
+        last_name,
         email,
       });
 
@@ -29,8 +29,8 @@ class UserController {
         data: {
           token,
           id: newUser[0].id,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
           address: req.body.address,
           email: req.body.email,
         },
@@ -70,22 +70,22 @@ class UserController {
       }
 
       const {
-        id, firstname, lastname, email,
+        id, first_name, last_name, email,
       } = foundUser[0];
 
       const token = JwtAuthenticate({
         id,
-        firstname,
-        lastname,
+        first_name,
+        last_name,
         email,
-      });  
+      }); 
       return res.status(200).json({
         status: 200,
         data: {
           token,
           id,
-          firstName: firstname,
-          lastName: lastname,
+          first_name: first_name,
+          last_name: last_name,
           email,
         },
       });
