@@ -46,6 +46,7 @@ const createCarsTable = () => {
         price FLOAT NOT NULL,
         manufacturer VARCHAR(255) NOT NULL,
         model VARCHAR(255) NOT NULL,
+        image_url VARCHAR(200) NOT NULL,
         body_type VARCHAR (255) NOT NULL
     )`;
 
