@@ -7,6 +7,7 @@ const postAdValidate = {
   state: /^[a-zA-Z]+$/,
   status: /^[a-zA-Z]+$/,
   price_offered: /^-?\d*(\.\d+)?$/,
+  new_price_offered: /^-?\d*(\.\d+)?$/,
 };
 
 export default postAdValidate;

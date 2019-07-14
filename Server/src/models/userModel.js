@@ -14,10 +14,10 @@ class User {
   static async createUser(user) {
     const password = Password.hashPassword(user.password);
     const {
-      email, firstName, lastName, address,
+      email, first_name, last_name, address,
     } = user;
-    const sql = 'INSERT INTO users (firstname, lastname, email, address, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
-    const params = [firstName, lastName, email, address, password];
+    const sql = 'INSERT INTO users (first_name, last_name, email, address, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    const params = [first_name, last_name, email, address, password];
     const query = queryDB(sql, params);
     return query;
   }

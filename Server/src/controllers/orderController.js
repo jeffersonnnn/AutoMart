@@ -6,7 +6,7 @@ class OrderController {
     try {
       const postOrder = await Orders.createOrder(req.body, req.authUser.id);
       const {
-        price_offered, car_id, status,
+        price_offered, car_id,
       } = req.body;
       const foundCar = await Cars.findById(car_id);
       return res.status(201).json({
@@ -15,9 +15,9 @@ class OrderController {
           id: postOrder[0].id,
           car_id,
           created_on: postOrder[0].created_on,
-          status,
+          status: foundCar[0].status,
           price: foundCar[0].price,
-          price_offered,   
+          price_offered,
         },
       });
     } catch (error) {
@@ -35,20 +35,25 @@ class OrderController {
   static async adjustOrder(req, res) {
     try {
       const foundOrder = await Orders.findByOrder(req.params.orderId);
+      console.log(foundOrder)
       const updatedPrice = await Orders.adjustOrderPrice(parseInt(req.params.orderId, 10),
         req.body.price_offered);
 
-      const { new_price_offered } = req.body;
+
+      const {
+        id, car_id, status, price_offered, 
+      } = foundOrder[0];
 
       if (foundOrder[0].status !== 'pending') {
         return res.status(400).json({ status: 400, message: 'offer processed already' });
       }
+
       return res.status(201).json({
         status: 201,
         data: {
-          id: foundOrder[0].id,
-          car_id: foundOrder[0].car_id,
-          status: foundOrder[0].status,
+          id,
+          car_id,
+          status,
           old_price_offered: foundOrder[0].price_offered,
           new_price_offered: updatedPrice[0].price_offered,
         },
