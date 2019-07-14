@@ -34,6 +34,15 @@ class Cars {
     const query = queryDB(sql, params);
     return query;
   }
+
+  static async getAvailableCars(status) {
+    const sql = 'SELECT * FROM cars WHERE status = $1;'
+    const params = [status];
+
+    const query = queryDB(sql, params);
+
+    return query;
+  }
 }
 
 export default Cars;

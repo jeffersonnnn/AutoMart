@@ -6,7 +6,7 @@ class CarsController {
       const postAd = await Cars.postCars(req.body, req.authUser.id);
 
       const {
-        manufacturer, model, price, state, status,
+        manufacturer, model, price, state, status, image_url,
       } = req.body;
 
       return res.status(201).json({
@@ -19,6 +19,7 @@ class CarsController {
           model,
           price,
           state,
+          image_url,
           status: status || postAd[0].status,
         },
       });
@@ -47,7 +48,7 @@ class CarsController {
       );
 
       const {
-        id, created_on, manufacturer, model, price, state,
+        id, created_on, manufacturer, model, price, state, image_url,
       } = foundCar[0];
 
 
@@ -61,6 +62,7 @@ class CarsController {
           model,
           price,
           state,
+          image_url,
           status: updatedStatus[0].status,
         },
       });
@@ -76,14 +78,14 @@ class CarsController {
     }
   }
 
-  static async adjustCarPrice (req, res) {
+  static async adjustCarPrice(req, res) {
     try {
       const foundAd = await Cars.findById(parseInt(req.params.carId, 10));
       const updatedAdPrice = await Cars.adjustCarPrice(
         parseInt(req.params.carId, 10), req.body.price,
       );
       const {
-        id, created_on, manufacturer, model, state, status,
+        id, created_on, manufacturer, model, state, status, image_url,
       } = foundAd[0];
 
       return res.status(201).json({
@@ -96,6 +98,7 @@ class CarsController {
           model,
           price: updatedAdPrice[0].price,
           state,
+          image_url,
           status,
         },
       });
@@ -116,7 +119,7 @@ class CarsController {
       const findCar = await Cars.findById(parseInt(req.params.carId, 10));    
 
       const {
-        id, owner, created_on, state, status, price, manufacturer, model, body_type,
+        id, owner, created_on, state, status, price, manufacturer, model, body_type, image_url,
       } = findCar[0];
 
       if (!findCar) {
@@ -134,10 +137,10 @@ class CarsController {
           price,
           manufacturer,
           model,
+          image_url,
           body_type,
         },
       });
-
     } catch (error) {
       return res.status(500).json({
         sucess: false,
@@ -146,7 +149,23 @@ class CarsController {
           process.env.NODE_ENV === 'production'
             ? 'Server down. Please try again later'
             : error.message,
-      });      
+      });
+    }
+  }
+
+  static async getAllAvailableCars(req, res) {
+    try {
+      const getCars = await Cars.getAvailableCars(req.params.status);
+      console.log(getCars);
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });     
     }
   }
 }
