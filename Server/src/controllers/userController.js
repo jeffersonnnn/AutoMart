@@ -26,6 +26,7 @@ class UserController {
 
       return res.status(201).json({
         status: 201,
+        message: 'Hey there, Welcome!',
         data: {
           token,
           id: newUser[0].id,
@@ -81,6 +82,7 @@ class UserController {
       }); 
       return res.status(200).json({
         status: 200,
+        message: 'Welcome back!',        
         data: {
           token,
           id,
