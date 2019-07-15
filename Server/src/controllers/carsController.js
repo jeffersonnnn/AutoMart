@@ -174,10 +174,36 @@ class CarsController {
           process.env.NODE_ENV === 'production'
             ? 'Server down. Please try again later'
             : error.message,
-      });  
+      });
     }
   }
 
+
+  static async deleteCar(req, res) {
+    try {
+      const findCar = await Cars.findById(req.params.carId);
+      await Cars.deleteCars(req.params.carId);
+      if (!findCar.length) {
+        return res.status(404).json({
+          status: 404,
+          message: 'Car does not exist',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'Ad deleted successfully',
+      });
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });
+    }
+  }
 }
 
 export default CarsController;
