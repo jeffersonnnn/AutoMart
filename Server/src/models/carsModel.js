@@ -35,14 +35,21 @@ class Cars {
     return query;
   }
 
-  static async getAvailableCars(status) {
-    const sql = 'SELECT * FROM cars WHERE status = $1;'
-    const params = [status];
+  static async getCarsWithinRange(status, from, to) {
 
+    let sql
+    let params 
+    if (typeof from === "undefined" || typeof to === "undefined") {
+        sql = 'SELECT * FROM cars WHERE status = $1;'
+        params = [status];
+    } else {
+        sql = 'SELECT * FROM cars WHERE status = $1 AND price BETWEEN $2 AND $3;'
+        params = [status, from, to];          
+      }
     const query = queryDB(sql, params);
-
     return query;
   }
+
 }
 
 export default Cars;

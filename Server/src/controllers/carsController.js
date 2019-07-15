@@ -155,7 +155,9 @@ class CarsController {
 
   static async getAllAvailableCars(req, res) {
     try {
-      const getCars = await Cars.getAvailableCars(req.query.status);
+      const getCars = await Cars.getCarsWithinRange(
+        req.query.status, req.query.min_price, req.query.max_price,
+      );
       if (!getCars.length) {
         return res.status(400).json({ status: 400, message: 'sorry, all cars are sold' });  
       }
@@ -175,6 +177,7 @@ class CarsController {
       });  
     }
   }
+
 }
 
 export default CarsController;
