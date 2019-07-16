@@ -36,26 +36,32 @@ class Cars {
   }
 
   static async getCarsWithinRange(status, from, to) {
-    let sql
-    let params 
-    if (typeof from === "undefined" || typeof to === "undefined") {
-        sql = 'SELECT * FROM cars WHERE status = $1;'
-        params = [status];
+    let sql;
+    let params;
+    if (typeof from === 'undefined' || typeof to === 'undefined') {
+      sql = 'SELECT * FROM cars WHERE status = $1;'
+      params = [status];
     } else {
-        sql = 'SELECT * FROM cars WHERE status = $1 AND price BETWEEN $2 AND $3;'
-        params = [status, from, to];          
-      }
+      sql = 'SELECT * FROM cars WHERE status = $1 AND price BETWEEN $2 AND $3;'
+      params = [status, from, to];        
+    }
     const query = queryDB(sql, params);
     return query;
   }
 
   static async deleteCars(id) {
-   const sql = 'DELETE FROM cars WHERE id = $1 RETURNING *';
+    const sql = 'DELETE FROM cars WHERE id = $1 RETURNING *';
     const params = [id];
     const query = queryDB(sql, params);
     return query;
   }
 
+  static async viewCars() {
+    const sql = 'SELECT * FROM cars;';
+    const query = queryDB(sql);
+
+    return query;
+  }
 }
 
 export default Cars;

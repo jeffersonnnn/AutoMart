@@ -155,11 +155,24 @@ class CarsController {
 
   static async getAllAvailableCars(req, res) {
     try {
+      if (Object.keys(req.query).length === 0) {
+        if (req.authUser.id === 1) {
+          const allCars = await Cars.viewCars();
+          return res.status(200).json({
+            status: 200,
+            data: allCars,
+          });
+        }
+        return res.status(401).json({
+          status: 401,
+          message: 'You are not authorized to perform this action',
+        });
+      }
       const getCars = await Cars.getCarsWithinRange(
         req.query.status, req.query.min_price, req.query.max_price,
       );
       if (!getCars.length) {
-        return res.status(400).json({ status: 400, message: 'sorry, all cars are sold' });  
+        return res.status(400).json({ status: 400, message: 'sorry, all cars are sold' });
       }
 
       return res.status(200).json({
@@ -192,6 +205,26 @@ class CarsController {
       return res.status(200).json({
         status: 200,
         message: 'Ad deleted successfully',
+      });
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        error: 'Server error',
+        message:
+          process.env.NODE_ENV === 'production'
+            ? 'Server down. Please try again later'
+            : error.message,
+      });
+    }
+  }
+
+  static async getAllCars(req, res) {
+    try {
+      const getCars = await Cars.viewCars();
+
+      return res.status(200).json({
+        status: 200,
+        data: getCars,
       });
     } catch (error) {
       return res.status(500).json({
