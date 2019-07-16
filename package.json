@@ -1,0 +1,64 @@
+{
+  "name": "AutoMart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8.11.2"
+  },
+  "scripts": {
+    "test": "cross-env NODE_ENV=test npm run drop && cross-env NODE_ENV=test npm run connect && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register --require @babel/polyfill Server/src/test/* --exit",
+    "nyc": "nyc report --reporter=text-lcov | coveralls",
+    "cover": "istanbul cover _mocha Server/src/test",
+    "build": "rm -rf Server/build && babel Server --out-dir Server/build",
+    "dev-start": "nodemon --exec babel-node Server/server.js --env",
+    "start": "babel-node Server/build/server.js && npm run connect",
+    "heroku-postbuild": "npm build",
+    "connect": "babel-node Server/src/models/createTables.js",
+    "drop": "babel-node Server/src/models/dropTables.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffersonnnn/AutoMart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeffersonnnn/AutoMart/issues"
+  },
+  "homepage": "https://github.com/jeffersonnnn/AutoMart#readme",
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "babel-core": "^7.0.0-bridge.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.1.4",
+    "moment": "^2.24.0",
+    "pg": "^7.11.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.3",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.18.0",
+    "istanbul": "^0.4.5",
+    "make-runnable": "^1.3.6",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.19.1",
+    "bcryptjs": "^2.4.3",
+    "nyc": "^14.1.1",
+    "supertest": "^4.0.2"
+  }
+}

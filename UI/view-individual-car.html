@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    AutoMart - your one stop solution for automotive needs
+  </title>
+<link rel="stylesheet" href="./assets/css/styles.css" /> 
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Nunito" rel="stylesheet">
+</head>
+<body>
+  <header class="menu-container">
+    <nav class="menu">
+      <a href="./" class="logo"><h2 class="homepage">Auto Mart</h2></a>
+      <div class="links">
+     <a href=""><p class="search">Search</p></a>
+     <a href="./showroom.html"><p class="login">Your Showroom</p></a>
+     <a href="./profile.html"><p class="profile">Profile</p></a>
+    </div> 
+    </nav>  
+  </header>
+ <main>
+    <section class="container">
+      <h2>View Car | Performance and Specifications </h2>
+      <div class="profile">
+        <div class="profile-card">
+          <img style="border-radius:50%;width:150px;height:150px;border:0;" src="./assets/img/showroomImages/5cd71b344-7eee.jpg">
+          <p>Seller</p>
+          <p class="profile-name">Harvey Weinstein</p>
+          <div class="profile-details">
+            <div class="detail">
+             <div class="title">
+              <h3>Phone Number</h3>
+              <p>2347033503357</p>
+             </div>
+              <div>
+              <button id="purchase-trigger" class="btn btn-go">Make a purchase</button>
+              </div>
+            </div>
+        </div>
+      </div>
+          <div class="card profile-card images">
+            <div class="distribute">
+              <div class="image">
+                <img src="assets/img/showroomImages/5cd71b344-7eee.jpg">
+                <img src="assets/img/showroomImages/5cd71b344-7eee.jpg">
+                <img src="assets/img/showroomImages/5cd71b344-7eee.jpg">
+                <img src="assets/img/showroomImages/5cd71b344-7eee.jpg">
+              </div>
+              <div class="top-positioning">
+                <div>
+                </div>
+                <div class="positioning">
+                  <h2>Condition</h2>
+                  <p>Used</p>
+                </div>
+                <div class="positioning">
+                  <h2>Make and Model</h2>
+                  <p>Toyota Corolla</p>
+                </div>
+                <div class="positioning">
+                  <h2>Mileage</h2>
+                  <p>30,000 km</p>
+                </div>
+                <div class="positioning">
+                  <h2>Year of Manufacture</h2>
+                  <p>2011</p>
+                </div>
+                <div class="positioning">
+                  <h2>Price</h2>
+                  <p>NGN3,000,000</p>
+                </div>
+                <div class="positioning"> 
+                  <h2>Transmission</h2>
+                  <p>Manual</p>
+                </div>
+                <div class="positioning">
+                  <h2>Color</h2>
+                  <p>Red</p>
+                </div>
+                <div class="positioning">
+                  <h2>Registered Car</h2>
+                  <p>Yes</p>
+                </div>
+              </div>
+              </div>  
+              </div>
+            </div>       
+          </div>
+      </div>
+    <!--Modal for Purchase-->
+  <div class="modal purchase-modal">
+    <div class="modal-content container">
+      <div class=" item">
+        <span class="close-button">×</span>
+        <h1>Fast and easy pay with Interswitch Webpay</h1>
+        <form class="payments-form" onsubmit="return submitForm()" method="post">
+           <h2>Please Input your Details</h2>
+           <label for="enter-amount">Card Number<span>*</span></label>
+           <input type="number" class="form-element" name="enter-number" id="enter-number">  
+           <label for="enter-amount">Card Month and Year<span>*</span></label>
+           <input type="number" class="form-element" name="enter-date" id="enter-date">
+           <label for="enter-amount">CVV<span>*</span></label>
+           <input type="number" class="form-element" name="enter-cvv" id="enter-cvv">   
+           <button type="submit" class="success btn btn-primary">Pay</button>
+        </form>
+      <div>
+    </div>
+  </div>
+ </main>
+</body> 
+<script src="./assets/js/index.js"></script>
+</html>
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    AutoMart - your one stop solution for automotive needs
+  </title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Nunito" rel="stylesheet">
+<body>
+<!--Begin Header-->	
+<header class="menu-container">
+   <nav class="menu">
+    <a href="./index.html" class="logo"><h2 class="homepage">Auto Mart</h2></a>
+    <div class="links">
+      <a href="./login.html"><p class="login">Login</p></a>
+      <a href="./"><p class="signup">Sign Up</p></a>
+    </div> 
+   </nav>  
+</header>
+<!--End Header-->
+  <main>
+    <section class="container form-container">
+      <h2 class="section-title">Register for an account</h2>
+      <form class="form-card" onsubmit="return submitForm()" method="post">
+        <label for="firstname">Enter First Name <span>*</span></label>
+        <input type="text" id="firstname" name="firstname" class="form-element"
+          placeholder="Enter First Name" required />
+        <label for="lastname">Enter Last name <span>*</span></label>
+        <input type="text" id="lastname" name="lastname" class="form-element"
+          placeholder="Enter Last Name" required />
+        <label for="othername">Enter other name</label>
+        <input type="text" id="othername" name="othername" class="form-element"
+          placeholder="Enter Other Name" />
+        <label for="email">Enter Email <span>*</span></label>
+        <input type="email" id="email" name="email" class="form-element"
+          placeholder="Enter Email" required />
+        <label for="phonenumber">Enter Phone Number <span>*</span></label>
+        <input type="number" id="phonenumber" name="phonenumber" class="form-element"
+          placeholder="Enter Phone Number" required />
+        <label for="password">Enter Password <span>*</span></label>
+        <input type="password" id="password" name="password" class="form-element"
+          placeholder="Enter Password" required />
+        <button type="submit" class="success btn btn-primary">Sign Up</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p class="credits">AutoMart | Copyright &copy; 2019 |  <a href="./admin-page.html">Admin Page</a>  </footer>
+
+</body>
+</html>
