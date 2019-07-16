@@ -12,8 +12,8 @@
     "cover": "istanbul cover _mocha Server/src/test",
     "build": "rm -rf Server/build && babel Server --out-dir Server/build",
     "dev-start": "nodemon --exec babel-node Server/server.js --env",
-    "start": "babel-node Server/build/server.js",
-    "heroku-postbuild": "npm build && run npm connect",
+    "start": "babel-node Server/build/server.js && npm run connect",
+    "heroku-postbuild": "npm build",
     "connect": "babel-node Server/src/models/createTables.js",
     "drop": "babel-node Server/src/models/dropTables.js"
   },
