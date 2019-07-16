@@ -5,14 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _pg = _interopRequireDefault(require("pg"));
+var _require = require('pg'),
+    Pool = _require.Pool;
 
-var _dotenv = _interopRequireDefault(require("dotenv"));
+var dotenv = require('dotenv');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-_dotenv["default"].config();
-
+dotenv.config();
 var _process$env = process.env,
     PRODUCTION_URL = _process$env.PRODUCTION_URL,
     DATABASE_URL = _process$env.DATABASE_URL,
@@ -32,7 +30,7 @@ var getConnection = function getConnection(env) {
   }
 };
 
-var pool = new _pg["default"]({
+var pool = new Pool({
   connectionString: getConnection(NODE_ENV)
 });
 var _default = pool;

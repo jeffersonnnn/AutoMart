@@ -7,6 +7,8 @@ exports["default"] = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
+var _path = _interopRequireDefault(require("path"));
+
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
 var _routes = _interopRequireDefault(require("./src/routes"));
@@ -19,7 +21,10 @@ app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
 app.get('/', function (req, res) {
-  res.send('welcome to AutoMart');
+  res.status(301).redirect('/docs');
+});
+app.get('/docs', function (req, res) {
+  res.status(200).sendFile(_path["default"].resolve('output.html'));
 });
 app.use('/api/v1', _routes["default"]);
 var server = app.listen(process.env.PORT || 3000, function () {

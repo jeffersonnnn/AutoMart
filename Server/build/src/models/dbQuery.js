@@ -29,7 +29,7 @@ function () {
             return _context.abrupt("return", new Promise(function (resolve, reject) {
               return _pool["default"].connect().then(function (client) {
                 return client.query(sql, params).then(function (result) {
-                  resolve(result.rows);
+                  return resolve(result.rows);
                 })["catch"](function (error) {
                   reject(error);
                 });

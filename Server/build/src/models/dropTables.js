@@ -12,10 +12,11 @@ var dropUsersTable = function dropUsersTable() {
   var queryText = "DROP TABLE IF EXISTS users CASCADE;\n                    DROP TABLE IF EXISTS orders CASCADE;\n                    DROP TABLE IF EXISTS cars CASCADE;\n                    DROP TABLE IF EXISTS flags CASCADE;";
   return _pool["default"].connect().then(function (client) {
     return client.query(queryText).then(function (res) {
-      console.log('Result', res.rows);
+      console.log(res.rows);
       client.end();
     })["catch"](function (err) {
       console.log(err);
+      client.end();
     });
   });
 };

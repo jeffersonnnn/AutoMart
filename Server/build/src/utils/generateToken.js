@@ -16,8 +16,8 @@ _dotenv["default"].config();
 var generateToken = function generateToken(user) {
   var payload = {
     id: user.id,
-    firstName: user.firstname,
-    lastName: user.lastname,
+    first_name: user.first_name,
+    last_name: user.last_name,
     email: user.email,
     address: user.address
   };

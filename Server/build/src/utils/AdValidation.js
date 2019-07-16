@@ -12,7 +12,8 @@ var postAdValidate = {
   price: /^-?\d*(\.\d+)?$/,
   state: /^[a-zA-Z]+$/,
   status: /^[a-zA-Z]+$/,
-  priceOffered: /^-?\d*(\.\d+)?$/
+  price_offered: /^-?\d*(\.\d+)?$/,
+  new_price_offered: /^-?\d*(\.\d+)?$/
 };
 var _default = postAdValidate;
 exports["default"] = _default;

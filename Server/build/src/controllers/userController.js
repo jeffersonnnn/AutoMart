@@ -9,6 +9,8 @@ var _userModel = _interopRequireDefault(require("../models/userModel"));
 
 var _generateToken = _interopRequireDefault(require("../utils/generateToken"));
 
+var _password = _interopRequireDefault(require("../utils/password"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -34,7 +36,7 @@ function () {
       var _registerUser = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(req, res) {
-        var foundUser, newUser, _newUser$, id, firstname, lastname, email, token;
+        var foundUser, newUser, _newUser$, id, first_name, last_name, email, token;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -63,19 +65,21 @@ function () {
 
               case 8:
                 newUser = _context.sent;
-                _newUser$ = newUser[0], id = _newUser$.id, firstname = _newUser$.firstname, lastname = _newUser$.lastname, email = _newUser$.email;
+                _newUser$ = newUser[0], id = _newUser$.id, first_name = _newUser$.first_name, last_name = _newUser$.last_name, email = _newUser$.email;
                 token = (0, _generateToken["default"])({
                   id: id,
-                  firstname: firstname,
-                  lastname: lastname,
+                  first_name: first_name,
+                  last_name: last_name,
                   email: email
                 });
                 return _context.abrupt("return", res.status(201).json({
                   status: 201,
+                  message: 'Hey there, Welcome!',
                   data: {
                     token: token,
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
+                    id: newUser[0].id,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
                     address: req.body.address,
                     email: req.body.email
                   }
@@ -103,6 +107,95 @@ function () {
       }
 
       return registerUser;
+    }()
+  }, {
+    key: "signIn",
+    value: function () {
+      var _signIn = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(req, res) {
+        var foundUser, isPasswordValid, _foundUser$, id, first_name, last_name, email, token;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _userModel["default"].findByEmail(req.body.email);
+
+              case 3:
+                foundUser = _context2.sent;
+
+                if (foundUser.length) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                return _context2.abrupt("return", res.status(400).json({
+                  success: false,
+                  message: 'Email or Password incorrect'
+                }));
+
+              case 6:
+                _context2.next = 8;
+                return _password["default"].comparePassword(req.body.password, foundUser[0].password);
+
+              case 8:
+                isPasswordValid = _context2.sent;
+
+                if (isPasswordValid) {
+                  _context2.next = 11;
+                  break;
+                }
+
+                return _context2.abrupt("return", res.status(400).json({
+                  success: false,
+                  message: 'Email or Password incorrect'
+                }));
+
+              case 11:
+                _foundUser$ = foundUser[0], id = _foundUser$.id, first_name = _foundUser$.first_name, last_name = _foundUser$.last_name, email = _foundUser$.email;
+                token = (0, _generateToken["default"])({
+                  id: id,
+                  first_name: first_name,
+                  last_name: last_name,
+                  email: email
+                });
+                return _context2.abrupt("return", res.status(200).json({
+                  status: 200,
+                  message: 'Welcome back!',
+                  data: {
+                    token: token,
+                    id: id,
+                    first_name: first_name,
+                    last_name: last_name,
+                    email: email
+                  }
+                }));
+
+              case 16:
+                _context2.prev = 16;
+                _context2.t0 = _context2["catch"](0);
+                return _context2.abrupt("return", res.status(500).json({
+                  sucess: false,
+                  error: 'Server error',
+                  message: process.env.NODE_ENV === 'production' ? 'Server down. Please try again later' : _context2.t0.message
+                }));
+
+              case 19:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 16]]);
+      }));
+
+      function signIn(_x3, _x4) {
+        return _signIn.apply(this, arguments);
+      }
+
+      return signIn;
     }()
   }]);
 

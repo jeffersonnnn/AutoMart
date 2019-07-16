@@ -44,6 +44,7 @@ function () {
           price = _req$body.price,
           state = _req$body.state,
           status = _req$body.status;
+      console.log('==', req.authUser);
       var id = _carModel["default"].length + 1;
       var carData = {
         id: id,

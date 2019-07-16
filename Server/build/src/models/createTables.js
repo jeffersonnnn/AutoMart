@@ -12,12 +12,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  * Create users table
  */
 var createUsersTable = function createUsersTable() {
-  var queryText = "\n    CREATE TABLE IF NOT EXISTS \n      users(\n        id SERIAL PRIMARY KEY NOT NULL,\n        email VARCHAR(30) UNIQUE NOT NULL,\n        firstname VARCHAR (40) NOT NULL,\n        lastname VARCHAR(40) NOT NULL,\n        password VARCHAR(128) NOT NULL,\n        address VARCHAR(40),\n        role INTEGER DEFAULT 0\n    )";
+  var queryText = "CREATE TABLE IF NOT EXISTS \n      users(\n        id SERIAL PRIMARY KEY NOT NULL,\n        email VARCHAR(30) UNIQUE NOT NULL,\n        first_name VARCHAR (40) NOT NULL,\n        last_name VARCHAR(40) NOT NULL,\n        password VARCHAR(128) NOT NULL,\n        address VARCHAR(40),\n        is_admin BOOLEAN DEFAULT false\n    )";
   return _pool["default"].connect().then(function (client) {
     return client.query(queryText).then(function (res) {
+      /* eslint-disable no-console */
       console.log(res.rows);
       client.end();
     })["catch"](function (err) {
+      /* eslint-disable no-console */
       console.log(err);
       client.end();
     });
@@ -29,7 +31,7 @@ var createUsersTable = function createUsersTable() {
 
 
 var createCarsTable = function createCarsTable() {
-  var queryText = "\n    CREATE TABLE IF NOT EXISTS \n      cars(\n        id SERIAL PRIMARY KEY NOT NULL,\n        owner INTEGER REFERENCES users(id),\n        created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),\n        state VARCHAR (40) NOT NULL,\n        status VARCHAR (40) NOT NULL,\n        price VARCHAR(14) NOT NULL,\n        manufacturer VARCHAR(40) NOT NULL,\n        model VARCHAR(14) NOT NULL,\n        body_type VARCHAR (40) NOT NULL\n    )";
+  var queryText = "CREATE TABLE IF NOT EXISTS \n      cars(\n        id SERIAL PRIMARY KEY NOT NULL,\n        owner INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,\n        created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),\n        state VARCHAR (40) NOT NULL,\n        status VARCHAR(13) DEFAULT 'available',\n        price FLOAT NOT NULL,\n        manufacturer VARCHAR(255) NOT NULL,\n        model VARCHAR(255) NOT NULL,\n        image_url VARCHAR(200) NOT NULL,\n        body_type VARCHAR (255) NOT NULL\n    )";
   return _pool["default"].connect().then(function (client) {
     return client.query(queryText).then(function (res) {
       console.log(res.rows);
@@ -46,7 +48,7 @@ var createCarsTable = function createCarsTable() {
 
 
 var createOrdersTable = function createOrdersTable() {
-  var queryText = "\n  CREATE TABLE IF NOT EXISTS \n      orders(\n        id SERIAL PRIMARY KEY NOT NULL,\n        users_id INTEGER, \n        FOREIGN KEY (users_id) REFERENCES users(id),\n        cars_id INTEGER,\n        FOREIGN KEY (cars_id) REFERENCES cars(id),\n        amount VARCHAR(14) NOT NULL,\n        status VARCHAR(13) DEFAULT 'pending' \n    )";
+  var queryText = "CREATE TABLE IF NOT EXISTS \n      orders(\n        id SERIAL PRIMARY KEY NOT NULL,\n        buyer INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,\n        car_id INTEGER REFERENCES cars(id) ON DELETE CASCADE NOT NULL,\n        created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),\n        price_offered FLOAT NOT NULL,\n        status VARCHAR(13) DEFAULT 'pending' \n    )";
   return _pool["default"].connect().then(function (client) {
     return client.query(queryText).then(function (res) {
       console.log(res.rows);
@@ -63,7 +65,7 @@ var createOrdersTable = function createOrdersTable() {
 
 
 var createFlagsTable = function createFlagsTable() {
-  var queryText = "\n    CREATE TABLE IF NOT EXISTS \n      flags(\n        id SERIAL PRIMARY KEY NOT NULL,\n        car_id INTEGER,\n        FOREIGN KEY (car_id) REFERENCES cars(id),\n        created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),\n        reason VARCHAR(40) NOT NULL,\n        description VARCHAR(40) NOT NULL\n    )";
+  var queryText = "CREATE TABLE IF NOT EXISTS \n      flags(\n        id SERIAL PRIMARY KEY NOT NULL,\n        car_id INTEGER REFERENCES cars(id) ON DELETE CASCADE NOT NULL,\n        created_on TIMESTAMP WITH TIME ZONE DEFAULT now(),\n        reason VARCHAR(255) NOT NULL,\n        description VARCHAR(255) NOT NULL\n    )";
   return _pool["default"].connect().then(function (client) {
     return client.query(queryText).then(function (res) {
       console.log(res.rows);
@@ -103,4 +105,4 @@ regeneratorRuntime.mark(function _callee() {
       }
     }
   }, _callee);
-}))();
+}))(); // owner INTEGER REFERENCES users(id),

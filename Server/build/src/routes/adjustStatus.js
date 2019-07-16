@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
-var _carController = _interopRequireDefault(require("../controllers/carController"));
+var _carsController = _interopRequireDefault(require("../controllers/carsController"));
 
 var _verifyAuthToken = _interopRequireDefault(require("../middleware/verifyAuthToken"));
 
@@ -15,6 +15,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var router = _express["default"].Router();
 
-router.patch('/car/:carId/status', _verifyAuthToken["default"], _carController["default"].adjustCarStatus);
+router.patch('/car/:carId/status', _verifyAuthToken["default"], _carsController["default"].adjustCarStatus);
 var _default = router;
 exports["default"] = _default;

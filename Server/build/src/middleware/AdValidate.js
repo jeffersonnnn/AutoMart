@@ -74,18 +74,18 @@ function () {
     value: function postOrder(req, res, next) {
       var _req$body2 = req.body,
           carId = _req$body2.carId,
-          priceOffered = _req$body2.priceOffered;
+          price_offered = _req$body2.price_offered;
       var errors = [];
 
       if (!carId) {
         errors.push('Please select car');
       }
 
-      if (!priceOffered) {
+      if (!price_offered) {
         errors.push('Please insert figure');
       }
 
-      if (!_AdValidation["default"].priceOffered.test(priceOffered)) {
+      if (!_AdValidation["default"].price_offered.test(price_offered)) {
         errors.push('Please enter numbers only');
       }
 
@@ -101,16 +101,16 @@ function () {
   }, {
     key: "adjustOrder",
     value: function adjustOrder(req, res, next) {
-      var amount = req.body.amount;
+      var price_offered = req.body.price_offered;
 
-      if (amount === undefined) {
+      if (price_offered === undefined) {
         return res.status(406).json({
           status: 406,
           error: 'please input value'
         });
       }
 
-      if (!_AdValidation["default"].priceOffered.test(amount)) {
+      if (!_AdValidation["default"].price_offered.test(price_offered)) {
         return res.status(406).json({
           status: 406,
           error: 'please insert numbers only'
@@ -124,7 +124,7 @@ function () {
     value: function adjustPrice(req, res, next) {
       var price = req.body.price;
 
-      if (!_AdValidation["default"].priceOffered.test(price)) {
+      if (!_AdValidation["default"].price.test(price)) {
         return res.status(406).json({
           status: 406,
           error: 'please insert numbers only'

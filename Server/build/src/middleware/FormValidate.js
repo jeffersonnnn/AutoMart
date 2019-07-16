@@ -26,33 +26,33 @@ function () {
     key: "validateSignup",
     value: function validateSignup(req, res, next) {
       var _req$body = req.body,
-          firstName = _req$body.firstName,
-          lastName = _req$body.lastName,
+          first_name = _req$body.first_name,
+          last_name = _req$body.last_name,
           email = _req$body.email,
           password = _req$body.password;
 
-      if (firstName === undefined || firstName === '') {
+      if (first_name === undefined || first_name === '') {
         return res.status(406).json({
           status: 406,
           error: 'First name is required!'
         });
       }
 
-      if (!_formValidation["default"].firstName.test(firstName)) {
+      if (!_formValidation["default"].first_name.test(first_name)) {
         return res.status(406).json({
           status: 406,
           error: 'Please input alphabets only'
         });
       }
 
-      if (lastName === undefined || lastName === '') {
+      if (last_name === undefined || last_name === '') {
         return res.status(406).json({
           status: 406,
           error: 'Last name is required!'
         });
       }
 
-      if (!_formValidation["default"].lastName.test(lastName)) {
+      if (!_formValidation["default"].last_name.test(last_name)) {
         return res.status(406).json({
           status: 406,
           error: 'Please input alphabets only'
