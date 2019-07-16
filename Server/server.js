@@ -20,7 +20,7 @@ app.get('/docs', (req, res) => {
     .sendFile(path.resolve('output.html'));
 });
 
-app.use('/api/v1', router);
+app.use(router);
 
 const server = app.listen(process.env.PORT || 3000, () => {
   console.log('App running on port 3000, yay');
