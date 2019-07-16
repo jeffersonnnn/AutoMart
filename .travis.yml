@@ -1,7 +1,24 @@
 language: node_js
-node_js: 
-  - 10
+node_js:
+- "8"
+sudo: required
+before_install:
+- npm install -g node-gyp
 script:
-  - npm run nyc
-
-  
+- npm run test
+install:
+- npm install
+addons:
+apt:
+sources:
+- ubuntu-toolchain-r-test
+packages:
+- g++-4.8
+env:
+- CXX=g++-4.8
+services:
+- postgresql
+before_script:
+- psql -c 'create database AutoMartDB_Test;' -U postgres
+after_success:
+- npm run nyc
