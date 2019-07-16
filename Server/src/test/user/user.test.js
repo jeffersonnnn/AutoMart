@@ -16,8 +16,8 @@ describe('User test', () => {
   .end((err, res) => {
    expect(res.status).to.equal(201);
    expect(res.body.message).to.equal('Hey there, Welcome!');
-   expect(res.body.email).to.equal('admin@gmail.com');
-   expect(res.body.address).to.equal('admin block');
+   expect(res.body.data.email).to.equal('admin@gmail.com');
+   expect(res.body.data.address).to.equal('admin block');
    done();
   })
  })
