@@ -12,7 +12,7 @@ var dotenv = require('dotenv');
 
 dotenv.config();
 var _process$env = process.env,
-    PRODUCTION_URL = _process$env.PRODUCTION_URL,
+    LOCAL_URL = _process$env.LOCAL_URL,
     DATABASE_URL = _process$env.DATABASE_URL,
     TEST_URL = _process$env.TEST_URL,
     NODE_ENV = _process$env.NODE_ENV;
@@ -20,13 +20,13 @@ var _process$env = process.env,
 var getConnection = function getConnection(env) {
   switch (env) {
     case 'production':
-      return PRODUCTION_URL;
+      return DATABASE_URL;
 
     case 'test':
       return TEST_URL;
 
     default:
-      return DATABASE_URL;
+      return LOCAL_URL;
   }
 };
 

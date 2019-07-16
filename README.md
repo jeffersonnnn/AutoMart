@@ -18,7 +18,7 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
 - User can view all unsold cars.
 - User can view all unsold cars within a price range.
 - Admin can delete a posted AD record.
-- Admin can view all posted ads whether sold or unsold
+- Admin can view all posted ads whether sold or unsold.
 
 ## Technologies
 
