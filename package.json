@@ -13,7 +13,7 @@
     "build": "rm -rf Server/build && babel Server --out-dir Server/build",
     "dev-start": "nodemon --exec babel-node Server/server.js --env",
     "start": "babel-node Server/build/server.js",
-    "heroku-postbuild": "npm build",
+    "heroku-postbuild": "npm build && run npm connect",
     "connect": "babel-node Server/src/models/createTables.js",
     "drop": "babel-node Server/src/models/dropTables.js"
   },
